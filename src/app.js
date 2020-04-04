@@ -1,6 +1,8 @@
 let defaultDataSetLength = 10;
+let algorithmRunning = false;
 const dataSetLengthInputRef = document.getElementById("dataSet");
 const searchInputRef = document.getElementById("search");
+const activeAlgorithmRef = document.getElementById("activeAlgorithm");
 
 function bootUp() {}
 
@@ -19,7 +21,7 @@ function getRandomInt(min, max) {
 function repaintSearch(array, max, activeIndex, active) {
   const resultRef = document.getElementById("result");
   let htmlString = "";
-  console.log(array, active);
+  console.log(array, max, activeIndex, active);
   for (let i = 0; i < array.length; i++) {
     htmlString += `
     <div
@@ -29,7 +31,7 @@ function repaintSearch(array, max, activeIndex, active) {
               ? "bg-success"
               : activeIndex === i
               ? "bg-primary"
-              : "bg-info"
+              : "bg-grey"
           } ml-2 d-flex align-items-end p-1 bar"
         >
         <p class="text-light text-center">${array[i]}</p>          
@@ -40,6 +42,11 @@ function repaintSearch(array, max, activeIndex, active) {
 }
 
 function linearSearch() {
+  if (algorithmRunning) {
+    return alert(
+      "Algorithm is already running. Please wait or refresh the page."
+    );
+  }
   if (!searchInputRef.value) {
     alert("Search number is required");
     return;
@@ -48,18 +55,70 @@ function linearSearch() {
   function recursion(i) {
     if (dataSetArray[i] == searchInputRef.value) {
       repaintSearch(dataSetArray, dataSetLengthInputRef.value || 10, i, true);
+      algorithmRunning = false;
       return i;
     }
     repaintSearch(dataSetArray, dataSetLengthInputRef.value || 10, i);
 
     if (i === dataSetArray.length - 1) {
-      return null;
+      algorithmRunning = false;
+      return alert("Number not found!!!");
     }
-    timeout = setTimeout(() => {
+    setTimeout(() => {
       recursion(++i);
     }, 1000);
   }
 
   const dataSetArray = resetData(dataSetLengthInputRef.value || 10);
+  algorithmRunning = true;
   recursion(0);
 }
+
+function binarySearch() {
+  if (algorithmRunning) {
+    return alert(
+      "Algorithm is already running. Please wait or refresh the page."
+    );
+  }
+  if (!searchInputRef.value) {
+    alert("Search number is required");
+    return;
+  }
+
+  const dataSetArray = resetData(dataSetLengthInputRef.value || 10);
+  var lowIndex = 0;
+  var highIndex = dataSetArray.length - 1;
+
+  function recursion(sortedArray) {
+    if (lowIndex <= highIndex) {
+      var midIndex = Math.floor((lowIndex + highIndex) / 2);
+      repaintSearch(sortedArray, dataSetLengthInputRef.value || 10, midIndex);
+      if (sortedArray[midIndex] == searchInputRef.value) {
+        repaintSearch(
+          sortedArray,
+          dataSetLengthInputRef.value || 10,
+          midIndex,
+          true
+        );
+        algorithmRunning = false;
+        return midIndex;
+      } else if (sortedArray[midIndex] < parseInt(searchInputRef.value)) {
+        lowIndex = midIndex + 1;
+      } else {
+        highIndex = midIndex - 1;
+      }
+      setTimeout(() => {
+        recursion(sortedArray);
+      }, 1000);
+    } else {
+      algorithmRunning = false;
+      return alert("Number not found!!!");
+    }
+  }
+  algorithmRunning = true;
+  recursion(dataSetArray.sort((a, b) => a - b));
+}
+
+function selectionSort() {}
+
+function bubbleSort() {}
