@@ -27,7 +27,7 @@
       }
     </style>
   </head>
-  <body onload="bootUp()">
+  <body>
     <div class="container p-4 card mt-4 mb-4">
       <h1 class="text-primary text-center">
         Algorithm Visualizer
@@ -37,7 +37,7 @@
       <div class="row p-4">
         <h5 class="text-dark">
           Active Algorithm&nbsp;:&nbsp;
-          <h5 id="activeAlogorithm" class="text-primary">Linear Search</h5>
+          <h5 id="activeAlgorithm" class="text-primary"></h5>
         </h5>
       </div>
       <div class="row p-4">
@@ -46,7 +46,7 @@
             <input
               type="number"
               class="form-control"
-              placeholder="Enter Data Set Size (Default 10)"
+              placeholder="Enter Data Set Max number (Default 10)"
               aria-label="Data Set Size"
               id="dataSet"
             />
@@ -74,18 +74,23 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6 col-lg-3 d-flex justify-content-center mb-2">
-          <button class="btn btn-primary" onclick="linearSearch()">Linear Search</button>
+        <div class="col-sm-6 col-lg-1"></div>
+        <div class="col-sm-6 col-lg-2 d-flex justify-content-center mb-2">
+          <button class="btn btn-primary btn-block" onclick="linearSearch()">Linear Search</button>
         </div>
-        <div class="col-sm-6 col-lg-3 d-flex justify-content-center mb-2">
-          <button class="btn btn-success" onclick="binarySearch()">Binary Search</button>
+        <div class="col-sm-6 col-lg-2 d-flex justify-content-center mb-2">
+          <button class="btn btn-success btn-block" onclick="binarySearch()">Binary Search</button>
         </div>
-        <div class="col-sm-6 col-lg-3 d-flex justify-content-center mb-2">
-          <button class="btn btn-danger" onclick="selectionSort()">Selection Sort</button>
+        <div class="col-sm-6 col-lg-2 d-flex justify-content-center mb-2">
+          <button class="btn btn-danger btn-block" onclick="selectionSort()">Selection Sort</button>
         </div>
-        <div class="col-sm-6 col-lg-3 d-flex justify-content-center mb-2">
-          <button class="btn btn-dark" onclick="bubbleSort()">Bubble Sort</button>
+        <div class="col-sm-6 col-lg-2 d-flex justify-content-center mb-2">
+          <button class="btn btn-info btn-block" onclick="bubbleSort()">Bubble Sort</button>
         </div>
+        <div class="col-sm-6 col-lg-2 d-flex justify-content-center mb-2">
+          <button class="btn btn-dark btn-block" onclick="reset()">Reset</button>
+        </div>
+        <div class="col-sm-6 col-lg-1"></div>
       </div>
 
     <script src="./src/app.js"/>
